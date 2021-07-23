@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Lato", sans-serif;
+        height: 100vh;
+        width: 100%;
+      }
+      #nav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 145, 0, 0.521);
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: space-around;
+        padding-top: 6vh;
+        padding-bottom: 6vh;
+        /* padding: 50px 0px; */
+      }
+      #nav a {
+        text-decoration: none;
+        color: white;
+      }
+      #main {
+        height: 100%;
+        background: url("./hex.jpg");
+        /* background-size: 100%; */
+        background-size: cover;
+        /* background-attachment: fixed; */
+      }
+      #header {
+        background: rgba(100, 148, 237, 0.562);
+        height: 6vh;
+      }
+      #footer {
+        background: rgba(255, 251, 0, 0.568);
+        height: 6vh;
+      }
+      .container {
+        width: 100%;
+        height: 88vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 255, 157, 0.555);
+      }
+      #toggler {
+        color: red;
+        position: absolute;
+        top: 0;
+        left: 0px;
+        cursor: pointer;
+      }
+      .box-1 {
+        width: 360px;
+        height: 480px;
+        background-color: rgba(17, 13, 228, 0.5);
+      }
+      .active {
+        animation: mainMove 0.5s cubic-bezier(1, -1.5, 0.5, 1) forwards;
+      }
+      .nav-active {
+        animation: navMove 0.5s cubic-bezier(1, -1.5, 0.5, 1) forwards;
+      }
+      @keyframes mainMove {
+        0% {
+          /* width: 0; */
+          margin-left: 0;
+        }
+        100% {
+          /* width: 250px; */
+          margin-left: 25%;
+        }
+      }
+      @keyframes navMove {
+        0% {
+          /* width: 0; */
+          width: 0;
+        }
+        100% {
+          /* width: 250px; */
+          width: 25%;
+        }
+      }
+    </style>
+    <title>playGround2</title>
+  </head>
+  <body>
+    <div id="nav">
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+    <div id="main">
+      <header id="header"></header>
+      <div class="container">
+        <span id="toggler">O</span>
+        <div class="box-1"></div>
+      </div>
+      <footer id="footer"></footer>
+    </div>
+    <script>
+      const toggler = document.querySelector("#toggler");
+      const nav = document.querySelector("#nav");
+      const main = document.querySelector("#main");
+      const html = document.body.parentNode;
+
+      function toggleClassMenu() {
+        // nav.classList.toggle("active");
+        main.classList.toggle("active");
+        toggler.classList.toggle("active");
+        nav.classList.toggle("nav-active");
+
+        if (toggler.classList.contains("active")) {
+          setTimeout(function () {
+            toggler.textContent = "X";
+          }, 200);
+        } else {
+          toggler.textContent = "O";
+        }
+      }
+
+      toggler.addEventListener("click", toggleClassMenu);
+
+      html.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (toggler.contains(event.target)) {
+        } else {
+          main.classList.remove("active");
+          toggler.classList.remove("active");
+          nav.classList.remove("nav-active");
+          toggler.textContent = "O";
+        }
+      });
+    </script>
+  </body>
+</html>
